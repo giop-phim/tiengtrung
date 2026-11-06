@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>Thầy Đồ — Lớp học chữ Hán 3D · HSK 1–6</title>
+<meta name="description" content="Bước vào lớp học 3D của Thầy Đồ: chạm vào bàn viết, tủ sách, bảng HSK để học 5.000 từ HSK 1–6 với bốn kỹ năng nghe – nói – đọc – viết. Miễn phí, không cần đăng nhập.">
+<meta name="theme-color" content="#1a120b">
+<script>if (/\.qoder\.website$/i.test(location.hostname)) document.documentElement.classList.add('qoder-host');</script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thầy Đồ">
+<meta property="og:title" content="Thầy Đồ — Lớp học chữ Hán 3D">
+<meta property="og:description" content="Một lớp học 3D tương tác: chạm vào đồ vật để luyện nghe – nói – đọc – viết, HSK 1–6.">
+<meta property="og:image" content="assets/thaydo-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/scene.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23a8231d'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23fdeccd' font-family='serif'%3E學%3C/text%3E%3C/svg%3E">
+</head>
+<body class="scene-body">
+
+<canvas id="stage3d" aria-label="Lớp học 3D của Thầy Đồ. Kéo để xoay, chạm vào đồ vật để mở bài học."></canvas>
+
+<div class="scene-vignette" aria-hidden="true"></div>
+
+<header class="hud hud-top">
+  <a class="hud-brand" href="index.html" aria-label="Thầy Đồ — trang chủ">
+    <span class="hud-seal">學</span>
+    <span class="hud-brand-text"><b>Thầy Đồ</b><i>Lớp học chữ Hán · 3D</i></span>
+  </a>
+
+  <div class="hud-stats" aria-label="Tiến độ của bạn">
+    <span class="hud-pill" id="sceneXp">0 XP</span>
+    <span class="hud-pill" id="sceneStreak">🔥 0 ngày</span>
+    <span class="hud-pill hud-rank" id="sceneRank">Học trò mới</span>
+    <button class="hud-pill hud-join" id="classJoinBtn" type="button" aria-haspopup="dialog" aria-label="Tham gia lớp học và đặt tên nhân vật" title="Bấm để đặt tên và tham gia lớp">
+      <i class="hud-join-dot" aria-hidden="true"></i><b id="classCount">…</b><span class="hud-join-label">học sinh</span>
+      <span class="hud-player" id="scenePlayerName" hidden></span>
+    </button>
+  </div>
+
+  <nav class="hud-links" aria-label="Điều hướng chính">
+    <a href="starter.html">Nhập môn</a>
+    <a href="learn.html">Học HSK</a>
+    <a href="thaydo.html">Chấm chữ</a>
+  </nav>
+
+  <button class="hud-star" id="starBtn" type="button" aria-pressed="false" aria-label="Tặng sao cho lớp và lưu trang" title="Tặng sao và lưu trang vào trình duyệt">
+    <span class="hud-star-glyph" aria-hidden="true">★</span><b id="starCount">…</b>
+  </button>
+
+  <button class="hud-music" id="musicBtn" type="button" aria-expanded="false" aria-controls="musicPanel" aria-label="Mở nhạc nền Trung Hoa" title="Mở nhạc nền Trung Hoa">
+    <span class="hud-music-glyph" aria-hidden="true">♪</span><span class="hud-music-label">Nhạc</span>
+  </button>
+</header>
+
+<aside class="music-panel" id="musicPanel" hidden aria-label="Nhạc nền Trung Hoa">
+  <div class="music-head">
+    <span class="music-seal" aria-hidden="true">樂</span>
+    <div class="music-head-text">
+      <b>Nhạc Trung Hoa</b>
+      <i>Nghe khi dạo sân trường và học bài</i>
+    </div>
+    <button class="music-close" id="musicClose" type="button" aria-label="Đóng trình phát nhạc">×</button>
+  </div>
+
+  <div class="music-now">
+    <div class="music-disc" id="musicDisc" aria-hidden="true">♪</div>
+    <div class="music-meta">
+      <b id="musicTitle">Chọn một bài nhạc</b>
+      <i id="musicArtist">Nhạc miễn phí · archive.org</i>
+    </div>
+  </div>
+
+  <div class="music-progress">
+    <span id="musicTime">0:00</span>
+    <input class="music-seek" id="musicSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Tua bài hát">
+    <span id="musicDur">0:00</span>
+  </div>
+
+  <div class="music-controls">
+    <button class="music-btn" id="musicPrev" type="button" aria-label="Bài trước">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h2.2v14H7zM19 5.5v13L9.4 12z"/></svg>
+    </button>
+    <button class="music-btn music-play" id="musicPlay" type="button" aria-label="Phát nhạc">
+      <svg class="music-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      <svg class="music-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>
+    </button>
+    <button class="music-btn" id="musicNext" type="button" aria-label="Bài sau">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5h-2.2v14H17zM5 5.5v13L14.6 12z"/></svg>
+    </button>
+    <label class="music-vol" title="Âm lượng">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l4-3v12l-4-3H4z"/><path d="M14.5 9a4 4 0 0 1 0 6M17 6.6a7.4 7.4 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <input id="musicVol" type="range" min="0" max="100" value="55" step="1" aria-label="Âm lượng nhạc">
+    </label>
+  </div>
+
+  <div class="music-list" id="musicList" role="listbox" aria-label="Danh sách bài nhạc"></div>
+
+  <p class="music-credit">Nhạc CC BY-NC từ <a href="https://archive.org/search?query=jamendo%20chinese" target="_blank" rel="noopener noreferrer">archive.org / Jamendo</a> — bật nhạc để thư giãn khi dạo trường.</p>
+</aside>
+
+<div class="hotspot-layer" id="hotspots" aria-label="Điểm tương tác trong lớp"></div>
+<div class="hotspot-dock" id="hotspotDock" aria-label="Chọn điểm tương tác"></div>
+
+<div class="hud hud-bottom">
+  <p class="hud-hint" id="hudHint"><span class="hint-dot"></span>Kéo để xoay lớp · cuộn để lại gần · chạm vào đồ vật để mở bài</p>
+  <div class="hud-actions">
+    <button class="hud-btn hud-btn-red" id="walkToggle" type="button" aria-pressed="false"><span id="walkToggleText">Đi dạo</span></button>
+    <button class="hud-btn" id="toggleHints" type="button" aria-pressed="true">Gợi ý</button>
+    <button class="hud-btn" id="resetCam" type="button">Góc nhìn</button>
+    <a class="hud-btn hud-btn-ghost" href="flat.html">Bản phẳng</a>
+  </div>
+</div>
+
+<aside class="scene-panel" id="scenePanel" aria-hidden="true" aria-label="Chi tiết bài học">
+  <button class="panel-close" id="panelClose" type="button" aria-label="Đóng bảng chi tiết">
+    <span></span><span></span>
+  </button>
+  <div class="panel-scroll" id="panelBody"></div>
+</aside>
+
+<div class="walk-ui" id="walkUI" hidden aria-hidden="true">
+  <div class="walk-prompt" id="walkPrompt" hidden>
+    <span class="walk-prompt-dot"></span>
+    <span id="walkPromptText"></span>
+  </div>
+
+  <div class="walk-stick" id="walkStick" role="group" aria-label="Cần điều khiển nhân vật">
+    <span class="walk-stick-ring"></span>
+    <span class="walk-stick-knob" id="walkStickKnob"></span>
+  </div>
+
+  <div class="walk-buttons">
+    <button class="walk-action" id="walkAction" type="button" disabled aria-label="Mở bài học gần nhất">
+      <b>E</b><span>Mở</span>
+    </button>
+    <button class="walk-exit" id="walkExit" type="button">Rời sân</button>
+  </div>
+
+  <p class="walk-tip">
+    <span>W A S D để đi · Shift chạy · E mở / ngồi / chơi · kéo để xoay camera</span>
+    <button class="walk-rename" id="walkRename" type="button">Đổi tên</button>
+  </p>
+</div>
+
+<div class="walk-modal" id="walkModal" hidden>
+  <form class="walk-card" id="walkForm" autocomplete="off">
+    <div class="walk-card-seal">學</div>
+    <span class="eyebrow">Nhập học · 入学</span>
+    <h2 id="walkTitle">Đặt tên cho học trò</h2>
+    <p id="walkIntro">Tên này hiện trên đầu nhân vật để mọi người trong sân trường nhận ra bạn.</p>
+    <p class="walk-card-count">👥 Hiện có <b id="walkCount">…</b> học sinh đang học cùng bạn</p>
+    <label class="walk-card-label" for="walkName">Tên hiển thị</label>
+    <input class="walk-card-input" id="walkName" name="walkName" maxlength="24" placeholder="Ví dụ: Lan, Minh, 小明…" required>
+    <div class="walk-card-actions">
+      <button class="btn btn-red" type="submit" id="walkSubmit">Vào trường</button>
+      <button class="btn btn-ghost" type="button" id="walkCancel">Ở lại lớp</button>
+    </div>
+    <p class="walk-card-note">Không cần đăng nhập. Bạn có thể đổi tên bất cứ lúc nào khi đi dạo.</p>
+  </form>
+</div>
+
+<div class="scene-loader" id="sceneLoader" role="status" aria-live="polite">
+  <div class="loader-seal">學</div>
+  <p>Đang mở lớp học…</p>
+  <span class="loader-bar"><i></i></span>
+  <a class="loader-flat" href="flat.html">Mở bản phẳng</a>
+</div>
+
+<div class="scene-fallback" id="sceneFallback" hidden>
+  <div class="fallback-card">
+    <div class="fallback-seal">學</div>
+    <span class="eyebrow">Thầy Đồ · Lớp học chữ Hán</span>
+    <h1>Lớp học 3D chưa mở được</h1>
+    <p id="fallbackMsg">Trình duyệt chưa hỗ trợ WebGL, hoặc thư viện 3D chưa tải xong. Bản phẳng vẫn đầy đủ bài học.</p>
+    <div class="fallback-actions">
+      <a class="btn btn-red" href="index.html">Thử lại</a>
+      <a class="btn btn-ghost" href="flat.html">Vào bản phẳng</a>
+    </div>
+    <p class="fallback-note">5.000 từ HSK 1–6 · nghe – nói – đọc – viết · miễn phí, không cần đăng nhập.</p>
+  </div>
+</div>
+
+<noscript>
+  <div class="scene-fallback" style="display:grid">
+    <div class="fallback-card">
+      <div class="fallback-seal">學</div>
+      <h1>Thầy Đồ</h1>
+      <p>Lớp học 3D cần JavaScript. Bạn vẫn có thể vào bản phẳng để học HSK 1–6.</p>
+      <a class="btn btn-red" href="flat.html">Vào bản phẳng</a>
+    </div>
+  </div>
+</noscript>
+
+<script>
+(function () {
+  window.__sceneReady = false;
+  window.__sceneFallback = function (msg) {
+    if (window.__sceneReady) return;
+    var box = document.getElementById('sceneFallback');
+    var loader = document.getElementById('sceneLoader');
+    if (msg) document.getElementById('fallbackMsg').textContent = msg;
+    if (loader) loader.style.display = 'none';
+    if (box) box.hidden = false;
+  };
+  window.__sceneSlowTimer = setTimeout(function () {
+    if (window.__sceneReady) return;
+    var p = document.querySelector('#sceneLoader p');
+    if (p) p.textContent = 'Mạng hơi chậm, vẫn đang mở lớp học…';
+  }, 8000);
+  window.__sceneTimer = setTimeout(function () {
+    window.__sceneFallback('Lớp học 3D mở quá lâu. Máy đang tải thư viện 3D — bạn có thể đợi thêm hoặc thử lại.');
+  }, 30000);
+})();
+</script>
+<script src="js/core.js"></script>
+<script src="js/music.js"></script>
+<script type="module" src="js/scene.js"></script>
+</body>
+</html>

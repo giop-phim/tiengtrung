@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Nhập môn · Học chữ Hán từ số 0 · Thầy Đồ</title>
+<meta name="description" content="Thanh điệu, phiên âm, 8 nét cơ bản, bộ thủ và 20 câu giao tiếp đầu tiên — dành cho người mới bắt đầu học tiếng Trung.">
+<meta name="theme-color" content="#f8eeda">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thầy Đồ">
+<meta property="og:title" content="Nhập môn · Học chữ Hán từ số 0 · Thầy Đồ">
+<meta property="og:description" content="Thanh điệu, phiên âm, 8 nét cơ bản, bộ thủ và 20 câu giao tiếp đầu tiên.">
+<meta property="og:image" content="assets/thaydo-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23a8231d'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23fdeccd' font-family='serif'%3E學%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <div class="brand-seal">學</div>
+      <div class="brand-name"><b>Thầy Đồ</b><span>Học viện chữ Hán</span></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Trang chủ</a>
+      <a href="starter.html">Nhập môn</a>
+      <a href="learn.html">Học HSK 1–6</a>
+      <a href="thaydo.html">Chấm chữ</a>
+    </nav>
+    <a class="btn btn-red btn-sm nav-cta" href="learn.html?level=1">Vào HSK 1</a>
+    <button class="burger" aria-label="Mở menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <section class="wrap starter-hero">
+    <div>
+      <span class="eyebrow">初学者 · Nhập môn</span>
+      <h1>Bắt đầu từ<br>con số 0</h1>
+      <p>Chưa biết một chữ Hán nào cũng không sao. Học thanh điệu, phiên âm, nét cơ bản, bộ thủ — rồi đọc 20 câu giao tiếp đầu tiên. Bấm vào từng ô để nghe phát âm.</p>
+      <div class="hero-actions">
+        <a class="btn btn-red btn-lg" href="#phrases">Học 20 câu đầu tiên</a>
+        <a class="btn btn-ghost btn-lg" href="learn.html?level=1">Vào HSK 1 →</a>
+      </div>
+      <div class="hero-note">
+        <span><i class="dot"></i> Có phát âm mẫu</span>
+        <span><i class="dot"></i> Không cần tài khoản</span>
+      </div>
+    </div>
+    <div class="starter-badge">
+      <div class="big">學</div>
+      <p>Học chữ bắt đầu từ một nét. Hôm nay là nét đầu tiên.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Bước 1</span>
+          <h2>Bốn thanh điệu</h2>
+          <p>Tiếng Trung đổi nghĩa theo giọng. Cùng một âm "ma" mà năm cách đọc là năm nghĩa khác nhau. Bấm để nghe.</p>
+        </div>
+      </div>
+      <div class="tone-grid" id="toneGrid"></div>
+      <div class="card" style="padding:20px 24px;margin-top:18px">
+        <p class="small muted" style="margin:0">Mẹo của thầy: thanh 1 ngân đều và cao, thanh 2 như đang hỏi lại, thanh 3 hạ giọng rồi nâng lên, thanh 4 dứt khoát như ra lệnh. Thanh nhẹ đọc nhẹ và ngắn.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Bước 2</span>
+          <h2>Phiên âm</h2>
+          <p>Thanh mẫu (phụ âm đầu) ghép với vận mẫu (phần vần) thành một âm tiết. Bấm vào ô để nghe âm mẫu.</p>
+        </div>
+      </div>
+      <div class="pinyin-grid">
+        <div class="pinyin-block card">
+          <h3>Thanh mẫu · 21</h3>
+          <div class="chip-row" id="initialGrid"></div>
+        </div>
+        <div class="pinyin-block card">
+          <h3>Vận mẫu · 36</h3>
+          <div class="chip-row" id="finalGrid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Bước 3</span>
+          <h2>Tám nét cơ bản</h2>
+          <p>Mọi chữ Hán đều ghép từ những nét này. Thầy dạy từ nét đầu tiên, không bỏ qua bước nào.</p>
+        </div>
+      </div>
+      <div class="stroke-grid" id="strokeGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Bước 4</span>
+          <h2>Bộ thủ thường gặp</h2>
+          <p>Nhìn bộ thủ là đoán được phần nào nghĩa của chữ. Học 20 bộ dưới đây trước là đủ dùng.</p>
+        </div>
+      </div>
+      <div class="chip-row" id="radicalGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="phrases">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Bước 5</span>
+          <h2>20 câu đầu tiên</h2>
+          <p>Những câu bạn sẽ dùng ngay ngày mai. Bấm loa để nghe, rồi bấm "Viết" để thầy chấm chữ.</p>
+        </div>
+      </div>
+      <div class="phrase-list" id="phraseList"></div>
+      <div style="margin-top:26px" class="center">
+        <a class="btn btn-red btn-lg" href="learn.html?level=1">Học tiếp HSK 1 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-game">
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <span class="eyebrow" style="color:var(--gold-2)">Luyện tay</span>
+          <h2 style="margin-top:12px">Viết thử chữ đầu tiên</h2>
+          <p>Chọn chữ 你 hoặc 好, viết vào ô, Thầy Đồ chấm điểm và phê một câu. Không đạt thì viết lại — thầy không giận.</p>
+        </div>
+        <a class="btn btn-red btn-lg" href="thaydo.html?level=1&w=你">Vào chấm chữ</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-bottom" style="border-top:0;margin-top:0;padding-top:0">
+      <span>© <span data-year></span> Thầy Đồ · Học viện chữ Hán</span>
+      <span>Khó tính, nhưng thương trò.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/core.js"></script>
+<script src="js/starter.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Học HSK 1–6 · Thầy Đồ</title>
+<meta name="description" content="Chọn cấp độ HSK 1–6 và bất kỳ từ nào, luyện nghe – nói – đọc – viết cùng Thầy Đồ.">
+<meta name="theme-color" content="#f8eeda">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thầy Đồ">
+<meta property="og:title" content="Học HSK 1–6 · Thầy Đồ">
+<meta property="og:description" content="Chọn cấp độ HSK 1–6 và bất kỳ từ nào, luyện nghe – nói – đọc – viết cùng Thầy Đồ.">
+<meta property="og:image" content="assets/thaydo-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23a8231d'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23fdeccd' font-family='serif'%3E學%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <div class="brand-seal">學</div>
+      <div class="brand-name"><b>Thầy Đồ</b><span>Học viện chữ Hán</span></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Trang chủ</a>
+      <a href="starter.html">Nhập môn</a>
+      <a href="learn.html">Học HSK 1–6</a>
+      <a href="thaydo.html">Chấm chữ</a>
+    </nav>
+    <a class="btn btn-red btn-sm nav-cta" href="thaydo.html">Thi chấm chữ</a>
+    <button class="burger" aria-label="Mở menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main class="learn-shell">
+  <div class="wrap">
+    <div class="page-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding-bottom:14px">
+      <div>
+        <span class="eyebrow">Bảng học</span>
+        <h1 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Học HSK 1–6</h1>
+        <p>Chọn cấp độ, chọn từ, rồi chuyển giữa bốn kỹ năng: nghe, nói, đọc, viết. Tiến độ được lưu trên máy này.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="pill" id="pillStreak">🔥 0 ngày</span>
+        <span class="pill" id="pillXp">0 XP</span>
+        <span class="pill" id="pillRank">Học trò mới</span>
+      </div>
+    </div>
+
+    <div class="learn-grid">
+      <aside class="rail card" id="rail">
+        <div class="rail-head">
+          <h2>HSK <span id="railLevel">1</span> · <span id="railCount">150</span> từ</h2>
+          <button class="rail-toggle icon-btn" id="railClose" style="padding:4px 8px">Đóng</button>
+        </div>
+        <div class="level-pills" id="levelPills"></div>
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Tìm chữ, pinyin, nghĩa…" autocomplete="off">
+        </div>
+        <div class="filter-row" id="filters">
+          <button class="filter-chip active" data-f="all">Tất cả</button>
+          <button class="filter-chip" data-f="new">Chưa học</button>
+          <button class="filter-chip" data-f="learning">Đang học</button>
+          <button class="filter-chip" data-f="done">Đã thuộc</button>
+          <button class="filter-chip" data-f="due">Đến hạn ôn</button>
+        </div>
+        <div class="rail-meta"><span id="listMeta">Đang tải…</span><span id="levelPct"></span></div>
+        <div class="wordlist" id="wordlist"></div>
+      </aside>
+      <div class="rail-backdrop" id="railBackdrop"></div>
+
+      <section class="study">
+        <div class="study-top">
+          <div class="study-title">
+            <button class="icon-btn rail-toggle" id="railOpen" style="padding:7px 14px">☰ Chọn từ</button>
+            <b id="curWord">…</b>
+            <span id="curIndex" class="small"></span>
+          </div>
+          <div class="navpad">
+            <button id="prevWord" aria-label="Từ trước">←</button>
+            <button id="randomWord" aria-label="Từ ngẫu nhiên" title="Từ ngẫu nhiên">⤨</button>
+            <button id="nextWord" aria-label="Từ sau">→</button>
+          </div>
+        </div>
+
+        <div class="mode-tabs" id="modeTabs">
+          <button class="mode-tab active" data-mode="card"><span class="mh">词</span>Thẻ từ</button>
+          <button class="mode-tab" data-mode="listen"><span class="mh">听</span>Nghe</button>
+          <button class="mode-tab" data-mode="speak"><span class="mh">说</span>Nói</button>
+          <button class="mode-tab" data-mode="read"><span class="mh">读</span>Đọc</button>
+          <button class="mode-tab" data-mode="write"><span class="mh">写</span>Viết</button>
+        </div>
+
+        <div class="card stage" id="stage" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script src="js/core.js"></script>
+<script src="js/handwriting.js"></script>
+<script src="js/learn.js"></script>
+</body>
+</html>

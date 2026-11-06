@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Lớp chấm chữ · Thầy Đồ</title>
+<meta name="description" content="Viết chữ Hán bằng ngón tay, Thầy Đồ chấm điểm từng nét và phê một câu. Đấu chữ HSK 1–6, leo hạng từ Đồng sinh đến Trạng nguyên.">
+<meta name="theme-color" content="#f8eeda">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thầy Đồ">
+<meta property="og:title" content="Lớp chấm chữ · Thầy Đồ">
+<meta property="og:description" content="Viết chữ Hán bằng ngón tay, Thầy Đồ chấm điểm từng nét và phê một câu.">
+<meta property="og:image" content="assets/thaydo-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23a8231d'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23fdeccd' font-family='serif'%3E學%3C/text%3E%3C/svg%3E">
+</head>
+<body class="game-bg">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <div class="brand-seal">學</div>
+      <div class="brand-name"><b>Thầy Đồ</b><span>Học viện chữ Hán</span></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Trang chủ</a>
+      <a href="starter.html">Nhập môn</a>
+      <a href="learn.html">Học HSK 1–6</a>
+      <a href="thaydo.html">Chấm chữ</a>
+    </nav>
+    <a class="btn btn-ghost btn-sm nav-cta" href="learn.html">Vào bảng học</a>
+    <button class="burger" aria-label="Mở menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main class="game-shell">
+  <div class="wrap">
+    <div class="page-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;padding:6px 0 20px">
+      <div>
+        <span class="eyebrow">Thầy Đồ chấm chữ</span>
+        <h1 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Lớp chấm chữ</h1>
+        <p>Chọn cấp độ, bốc một chữ, viết thật đẹp rồi nộp. Thầy chấm theo nét, bố cục và độ mượt — rồi phê một câu.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="pill" id="gStreak">🔥 0 ngày</span>
+        <span class="pill" id="gXp">0 XP</span>
+        <span class="pill" id="gRank">Học trò mới</span>
+      </div>
+    </div>
+
+    <div class="game-grid">
+      <!-- ---------- left ---------- -->
+      <aside class="gpanel card">
+        <h3>Cấp độ</h3>
+        <div class="g-levels" id="gLevels"></div>
+
+        <h3>Chữ của lượt này</h3>
+        <div class="g-word">
+          <div class="gw-han" id="gwHan">爱</div>
+          <div class="gw-py" id="gwPy">ài</div>
+          <div class="gw-mean" id="gwMean">yêu, yêu thích</div>
+          <button class="reveal" id="gwToggle">Ẩn gợi ý</button>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="gNew" style="width:100%;margin-top:12px">Bốc chữ khác</button>
+
+        <div class="g-stats">
+          <div class="g-stat"><span>Điểm cao chữ này</span><b id="gBest">—</b></div>
+          <div class="g-stat"><span>Phiên tốt nhất</span><b id="gSession">0</b></div>
+          <div class="g-stat"><span>Số lượt đã nộp</span><b id="gTurns">0</b></div>
+        </div>
+        <p class="small muted" style="margin-top:12px">Không giới hạn lượt. Viết lại bao nhiêu lần cũng được — thầy kiên nhẫn.</p>
+      </aside>
+
+      <!-- ---------- center ---------- -->
+      <div class="board-stage">
+        <div class="desk">
+          <div class="desk-head">
+            <div class="prompt">Thầy giao: <b id="assignWord">爱</b> <span id="assignPy" style="color:#8d2c1e">ài</span></div>
+            <div class="attempt-dots" id="dots" title="Các lượt gần đây"></div>
+          </div>
+          <div class="paper-wrap">
+            <div class="inkpad paper-big" id="gamePad"></div>
+          </div>
+          <div class="paper-controls">
+            <button class="btn btn-ghost" id="gUndo">Lùi nét</button>
+            <button class="btn btn-ghost" id="gClear">Xoá</button>
+            <button class="btn btn-ghost" id="gRef">Ẩn chữ mẫu</button>
+            <button class="btn btn-ghost" id="gStroke">Cách viết</button>
+            <button class="btn btn-red" id="gSubmit">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m5 13 4 4L19 7"/></svg>
+              Nộp bài
+            </button>
+          </div>
+          <p class="small" id="deskHint" style="color:#5c4a2f;text-align:center;margin-top:12px">Viết bằng ngón tay hoặc chuột. Chữ nên chiếm khoảng 70% ô.</p>
+        </div>
+      </div>
+
+      <!-- ---------- right ---------- -->
+      <aside class="game-side">
+        <div class="gpanel card teacher-card">
+          <div class="teacher-head">
+            <div class="teacher-avatar"></div>
+            <div>
+              <b>Thầy Đồ</b>
+              <span id="teacherStatus">Đang ngồi chờ trò…</span>
+            </div>
+          </div>
+          <div class="teacher-says" id="teacherSays">Viết chữ này đi trò. Thầy chấm ngay, không để lâu.</div>
+        </div>
+
+        <div class="gpanel card result-card" id="resultCard">
+          <div class="result-top">
+            <div class="seal-stamp" id="seal">良</div>
+            <div>
+              <div class="result-score"><span id="scoreNum">0</span><small>/100</small></div>
+              <div class="result-rank" id="scoreRank">Chưa chấm</div>
+            </div>
+          </div>
+          <div class="score-bars" id="scoreBars" style="margin-top:16px"></div>
+          <div class="teacher-note" style="margin-top:14px">
+            <b>Thầy phê:</b> <span id="verdict">—</span>
+            <div class="muted small" style="margin-top:6px" id="advice"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px">
+            <button class="btn btn-ghost btn-sm" id="rAgain">Viết lại</button>
+            <button class="btn btn-red btn-sm" id="rNext" style="flex:1">Chữ tiếp →</button>
+          </div>
+        </div>
+
+        <div class="gpanel card">
+          <h3>Bảng hạng</h3>
+          <div class="rank-ladder" id="rankLadder"></div>
+          <h3 style="margin-top:18px">Sổ điểm</h3>
+          <div id="scoreLog" class="small muted">Chưa có lượt chấm nào.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script src="js/core.js"></script>
+<script src="js/handwriting.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
